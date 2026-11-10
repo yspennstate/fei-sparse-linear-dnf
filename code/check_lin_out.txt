@@ -1,0 +1,18 @@
+star D=2 w=4                 terms   2  worst dev/rhs 0.0920 (i=1 d=1 k=2: E/Inf 2.9089, rhs 9.883; h-out 0.5000 <= 0.5000; N-in 0.0000 <= 0.0857)
+star D=3 w=5                 terms   3  worst dev/rhs 0.0600 (i=9 d=1 k=3: E/Inf 2.6664, rhs 11.100; h-out 0.6875 <= 0.6875; N-in 0.0000 <= 0.0385)
+star D=4 w=5                 terms   4  worst dev/rhs 0.0505 (i=1 d=1 k=4: E/Inf 2.7275, rhs 14.403; h-out 0.9375 <= 0.9375; N-in 0.0000 <= 0.0316)
+star D=4 w=4                 terms   4  no coordinate meets the hypotheses
+grid 4x4                     terms   8  worst dev/rhs 0.1084 (i=0 d=2 k=3: E/Inf 3.2454, rhs 11.484; h-out 0.8831 <= 1.0000; N-in 0.0001 <= 0.0043)
+random n=16 w=4 D=2 #0       terms   7  worst dev/rhs 0.1378 (i=9 d=1 k=2: E/Inf 3.3614, rhs 9.883; h-out 0.5000 <= 0.5000; N-in 0.0360 <= 0.0857)
+random n=16 w=4 D=2 #1       terms   7  worst dev/rhs 0.1396 (i=8 d=1 k=2: E/Inf 3.3793, rhs 9.883; h-out 0.5000 <= 0.5000; N-in 0.0206 <= 0.0857)
+random n=18 w=4 D=3 #0       terms  13  worst dev/rhs 0.0583 (i=0 d=2 k=3: E/Inf 2.9610, rhs 16.480; h-out 0.8798 <= 1.0000; N-in 0.0055 <= 0.1333)
+random n=18 w=4 D=3 #1       terms  11  worst dev/rhs 0.0682 (i=3 d=2 k=3: E/Inf 3.1238, rhs 16.480; h-out 0.8808 <= 1.0000; N-in 0.0033 <= 0.1333)
+random n=18 w=5 D=3 #0       terms   7  worst dev/rhs 0.1048 (i=5 d=1 k=3: E/Inf 3.1629, rhs 11.100; h-out 0.6875 <= 0.6875; N-in 0.0040 <= 0.0385)
+random n=18 w=5 D=3 #1       terms   7  worst dev/rhs 0.0997 (i=2 d=1 k=3: E/Inf 3.1064, rhs 11.100; h-out 0.6875 <= 0.6875; N-in 0.0039 <= 0.0385)
+random n=18 w=5 D=4 #0       terms   6  worst dev/rhs 0.0976 (i=3 d=1 k=3: E/Inf 3.0836, rhs 11.100; h-out 0.6875 <= 0.6875; N-in 0.0021 <= 0.0385)
+random n=18 w=5 D=4 #1       terms   7  worst dev/rhs 0.0973 (i=12 d=1 k=3: E/Inf 3.0805, rhs 11.100; h-out 0.6875 <= 0.6875; N-in 0.0023 <= 0.0385)
+random n=17 w=4 D=3 #0       terms  11  worst dev/rhs 0.0676 (i=13 d=2 k=3: E/Inf 3.1148, rhs 16.480; h-out 0.8812 <= 1.0000; N-in 0.0021 <= 0.1333)
+random n=17 w=4 D=3 #1       terms  11  worst dev/rhs 0.0953 (i=5 d=1 k=3: E/Inf 3.4079, rhs 14.777; h-out 0.8750 <= 0.8750; N-in 0.0020 <= 0.1000)
+random n=18 w=5 D=2 #0       terms   5  worst dev/rhs 0.1327 (i=16 d=1 k=2: E/Inf 2.9940, rhs 7.490; h-out 0.3125 <= 0.3125; N-in 0.0394 <= 0.0667)
+random n=18 w=5 D=2 #1       terms   6  worst dev/rhs 0.1327 (i=0 d=1 k=2: E/Inf 2.9936, rhs 7.490; h-out 0.3125 <= 0.3125; N-in 0.0392 <= 0.0667)
+checked 784 (coordinate, k) pairs; failures 0

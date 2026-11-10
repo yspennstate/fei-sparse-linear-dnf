@@ -1,0 +1,391 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Erasure entropies of sparse linear DNFs}
+\author{Yitzchak Shmalo}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+For a Boolean function $f$ and a coordinate $i$, the erasure entropy $E_i(f)$ is the conditional entropy of the event
+$i\in U$ given $U\setminus\{i\}$, where $U$ is drawn from the spectral distribution $\hat f^2$. The Fourier
+entropy-influence conjecture is equivalent to every non-constant $f$ having a coordinate with $E_i(f)=O(\Inf_i(f))$. We
+consider monotone DNFs whose terms all have width $w$, any two of which share at most one variable, and in which every
+variable lies in at most $D$ terms. We show that $E_i(f)/\Inf_i(f)=2+o(1)$ at every relevant coordinate, uniformly in
+the number of variables and terms, as $w\to\infty$ with $D\le2^{(1-\eta)(w-1)}$ for a fixed $\eta>0$, and we give an
+explicit error bound for each $w$, $D$ and degree of $i$. The proof rests on a separation inequality valid for every
+monotone function: if the derivative $D_if$ puts little spectral weight outside a family $\Omega$ of sets and the
+restriction $f|_{x_i=0}$ puts little weight on $\Omega$, then $E_i/\Inf_i$ is close to $2$. For a linear DNF, $\Omega$
+is the family of sets that contain many of the other variables of some term through $i$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ with $\chi_S(x)=(-1)^{\sum_{j\in S}x_j}$, and let $U$
+be a random subset with $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U)$ and the total influence is
+$I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy-influence (FEI) conjecture of Friedgut
+and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
+functions~\cite{OWZ}, for read-once formulas over gates of bounded arity~\cite{OT13} and over AND and OR
+gates~\cite{CKLS}, and for read-$k$ decision trees with $k$ fixed~\cite{WWW}; its min-entropy
+version is known for read-$k$ DNFs with $k$ fixed~\cite{Shalev,ACKSW}, and Han~\cite{Han} bounds $H(f)$ by a multiple of
+$I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$.
+
+The erasure entropy of $f$ at $i$ is
+\[
+E_i(f)=H\bigl(\mathbf 1[i\in U]\bigm| U\setminus\{i\}\bigr).
+\]
+It is the part of the entropy drop from $f$ to its two restrictions at $x_i$ that is not controlled by a constant times
+$\Inf_i$~\cite[Remarks~3.1--3.2]{Han},~\cite[(32)]{GMP}, and the FEI conjecture holds if and only if there is an
+absolute $c$ such that every non-constant Boolean function has a coordinate with $E_i(f)\le c\,\Inf_i(f)$~\cite{Shm1}.
+The trivial bound $E_i\le h_2(\Inf_i)$ loses a factor $\log(1/\Inf_i)$; the question is when that factor can be
+removed, and at which coordinates.
+
+This paper computes the ratio $E_i/\Inf_i$ asymptotically for a class of DNFs in which the coordinates are linked by
+many terms. Let $F$ be a monotone DNF on $\{0,1\}^n$. We call $F$ \emph{linear} if any two of its terms share at most
+one variable, \emph{$w$-uniform} if all its terms have $w$ variables, and of \emph{degree at most $D$} if every
+variable lies in at most $D$ terms. Put $f=1-2F$. Read-once DNFs are the linear DNFs of degree one; a linear DNF of
+degree $D$ is read-$D$, but its terms may overlap in a pattern with many cycles, for instance the $m$ rows and $m$
+columns of an $m\times m$ array.
+
+\begin{theorem}\label{thm:main}
+Fix $\eta\in(0,1)$. Over all $n$, all $w$-uniform linear monotone DNFs $F$ on $\{0,1\}^n$ of degree at most
+$D\le2^{(1-\eta)(w-1)}$, and all coordinates $i$ with $\Inf_i(f)>0$,
+\[
+\sup\Bigl|\frac{E_i(f)}{\Inf_i(f)}-2\Bigr|\longrightarrow0\qquad(w\to\infty).
+\]
+In particular $\sum_iE_i(f)=(2+o(1))\,I(f)$ on this class.
+\end{theorem}
+
+Theorem~\ref{thm:main} follows from an explicit inequality, Theorem~\ref{thm:lin}, valid for each width, degree and
+coordinate. The value $2$ is the limit of $E_i/\Inf_i$ for a coordinate inside one long AND that nothing else touches:
+for an AND of $k+1$ variables a direct computation gives $E_i/\Inf_i=2(1-2^{-k})+2^k\Phi\bigl((1-2^{-k})^2,4^{-k}\bigr)$
+at each of them (with $\Phi$ as in Section~\ref{sec:sep}), which differs from $2$ by at most $2^{-k}(2k+2)$. Theorem~\ref{thm:main} says that in a sparse
+linear DNF every coordinate behaves like that, however many terms pass through it and however the terms around it
+overlap.
+
+The proof separates two spectra. Write $g$ and $h$ for the even and odd parts of $f$ in $x_i$. For a monotone $F$, $h$
+is the indicator that $i$ is pivotal and $g=2N-1-h$, where $N$ is the indicator that $F$ vanishes at $x_i=0$. If the
+spectrum of $h$ lives on a family $\Omega$ of sets on which $N$ has almost no weight, then on $\Omega$ the two
+coefficients $\hat g(T)$ and $\hat h(T)$ have nearly the same square, and each such $T$ contributes nearly
+$2\hat h(T)^2$ to $E_i$. Proposition~\ref{prop:sep} makes this quantitative for every monotone function. For a linear
+DNF the family is $\Omega_k$, the sets that contain at least $k$ of the other variables of some term through $i$: the
+pivotal indicator spreads its spectral weight evenly over the subsets of the other variables of each such term (Lemma~\ref{lem:h}), while the background
+event $N$ needs $k$ further terms to reach $k$ of these variables, which costs $((D-1)2^{-(w-1)})^k$ (Lemma~\ref{lem:N}).
+
+Theorem~\ref{thm:main} is a statement about the ratio at every coordinate and does not prove the FEI conjecture for the
+class. The equivalence of~\cite{Shm1} needs a good coordinate in every restriction of $f$, and restrictions of a
+uniform linear DNF have terms of different widths.
+
+\section{A separation inequality}\label{sec:sep}
+
+Fix $i$ and write $f^{(b)}$ for the restriction $x_i=b$, a function of the other coordinates. Put
+\[
+g=\tfrac12\bigl(f^{(0)}+f^{(1)}\bigr),\qquad h=\tfrac12\bigl(f^{(0)}-f^{(1)}\bigr).
+\]
+Then $\hat g(T)=\hat f(T)$ and $\hat h(T)=\hat f(T\cup\{i\})$ for $T\subseteq[n]\setminus\{i\}$, and $\E
+h^2=\Inf_i(f)=:\delta$. Put $p(T)=\hat g(T)^2$ and $q(T)=\hat h(T)^2$, and
+\[
+\Phi(a,b)=\eta(a)+\eta(b)-\eta(a+b),\qquad \eta(x)=-x\log_2x.
+\]
+Since $(U\setminus\{i\},\mathbf 1[i\in U])$ takes the value $(T,0)$ with probability $p(T)$ and $(T,1)$ with probability
+$q(T)$, we have $E_i(f)=\sum_T\Phi(p(T),q(T))$. The function $\Phi$ is concave, homogeneous of degree one, increasing in
+each argument, and $\Phi(b,b)=2b$. Writing $\Phi(a,b)=a\log_2(1+b/a)+b\log_2(1+a/b)$ and using $\ln(1+t)\le t$ gives
+\begin{equation}\label{eq:phiq}
+\Phi(a,b)\le b\log_2\Bigl(e\,\frac{a+b}{b}\Bigr).
+\end{equation}
+
+Now let $F$ be monotone increasing and $f=1-2F$. Put $N=(1+f^{(0)})/2$ and $M=(1+f^{(1)})/2$, the indicators that $F$
+vanishes at $x_i=0$ and at $x_i=1$. Then $M\le N$, $h=N-M$ is the indicator that $i$ is pivotal, $\hat
+h(\emptyset)=\E h=\delta$, and
+\[
+g=N+M-1=2N-1-h,\qquad \hat g(T)=2\hat N(T)-\hat h(T)\quad(T\neq\emptyset).
+\]
+
+\begin{proposition}\label{prop:sep}
+Let $F$ be monotone, $f=1-2F$, $\delta=\Inf_i(f)>0$, and let $N$ be as above. Let $\Omega$ be a family of non-empty
+subsets of $[n]\setminus\{i\}$ and let $\varepsilon\in(0,1]$ and $\kappa\ge0$ satisfy
+\[
+\sum_{T\notin\Omega}\hat h(T)^2\le\varepsilon\delta,\qquad \sum_{T\in\Omega}\hat N(T)^2\le\kappa\delta.
+\]
+Then
+\[
+2-2\varepsilon-\frac{8}{\ln2}\sqrt\kappa\;\le\;\frac{E_i(f)}{\delta}\;\le\;2+\frac{8}{\ln2}\sqrt\kappa
++\varepsilon\log_2\Bigl(e\Bigl[3+\frac{8\Var N}{\varepsilon\delta}\Bigr]\Bigr)+\delta\log_2\bigl(e[1+\delta^{-2}]\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Split the sum $E_i=\sum_T\Phi(p(T),q(T))$ into $T\in\Omega$, $T\notin\Omega$ with $T\neq\emptyset$, and $T=\emptyset$.
+
+On $\Omega$. Fix $b\ge0$. The function $u\mapsto\Phi(u^2,b^2)$ is even, equals $2b^2$ at $u=\pm b$, and for $u\neq0$ has
+derivative $2u\log_2(1+b^2/u^2)$, whose absolute value is at most $(4/\ln2)b$ because $\ln(1+t^2)\le2t$ for $t\ge0$.
+For $T\in\Omega$ take $b=|\hat h(T)|$ and move $u$ from $-\hat h(T)$ to $\hat g(T)=2\hat N(T)-\hat h(T)$, a distance
+$2|\hat N(T)|$:
+\[
+\bigl|\Phi(p(T),q(T))-2q(T)\bigr|\le\frac{8}{\ln2}|\hat h(T)||\hat N(T)|.
+\]
+By Cauchy--Schwarz, $\sum_\Omega|\hat h||\hat N|\le\sqrt\delta\sqrt{\kappa\delta}$, and $(1-\varepsilon)\delta\le
+\sum_\Omega q\le\delta$. Hence
+\[
+2(1-\varepsilon)\delta-\frac{8}{\ln2}\delta\sqrt\kappa\le\sum_{T\in\Omega}\Phi(p(T),q(T))\le
+2\delta+\frac{8}{\ln2}\delta\sqrt\kappa.
+\]
+Since every term of $E_i$ is non-negative, this gives the lower bound.
+
+Off $\Omega$. Let $P$ and $Q$ be the sums of $p$ and $q$ over the non-empty $T\notin\Omega$; if $Q=0$ these terms
+vanish, so let $Q>0$. Then $Q\le\varepsilon\delta$,
+and from $p=(2\hat N-\hat h)^2\le8\hat N^2+2\hat h^2$ we get $P\le8\Var N+2\varepsilon\delta$. By~\eqref{eq:phiq} and
+Jensen's inequality for the concave function $t\mapsto\log_2t$,
+\[
+\sum\Phi(p,q)\le\sum q\log_2\Bigl(e\,\frac{p+q}{q}\Bigr)\le Q\log_2\Bigl(e\,\frac{P+Q}{Q}\Bigr)\le
+Q\log_2\Bigl(e\,\frac{c}{Q}\Bigr),\qquad c=8\Var N+3\varepsilon\delta.
+\]
+The last expression increases in $Q$ on $(0,c]$, so it is at most
+$\varepsilon\delta\log_2(e[3+8\Var N/(\varepsilon\delta)])$.
+
+At $T=\emptyset$, $q=\delta^2$ and $p\le1$, so~\eqref{eq:phiq} gives $\Phi\le\delta^2\log_2(e[1+\delta^{-2}])$. Adding
+the three parts gives the upper bound.
+\end{proof}
+
+\section{Linear DNFs}\label{sec:lin}
+
+From now on $F$ is a $w$-uniform linear monotone DNF of degree at most $D$, $f=1-2F$, $L=w-1\ge1$ and $a=2^{-L}$. Fix
+a coordinate $i$ that lies in $d\ge1$ terms $t_1,\dots,t_d$. The \emph{mates} of $t_s$ are its $L$ variables other than
+$i$, and $A_s$ is the indicator that all of them equal $1$. By linearity the mate sets are pairwise disjoint. A
+\emph{background term} is a term that does not contain $i$; $N$ is the indicator that every background term fails, and
+\[
+M=N\prod_{s=1}^d(1-A_s),\qquad h=N-M=N\cdot\mathbf 1\bigl[\textstyle\bigvee_sA_s\bigr],\qquad \delta=\E h.
+\]
+Put $A=\E N$.
+
+Two facts about linear DNFs are used repeatedly. A background term meets the mate set of $t_s$ in at most one variable,
+since it shares at most one variable with $t_s$ and does not contain $i$. And a term through a mate of $t_s$, other than
+$t_s$ itself, is a background term, since otherwise it would share two variables with $t_s$. We also use Harris's
+inequality: under a product measure, an increasing and a decreasing event are negatively correlated, and two increasing
+events are positively correlated.
+
+\begin{lemma}\label{lem:A}
+With $\theta=1-L(D-1)a-(d-1)a/2$,
+\[
+da\,\theta\,A\le\delta\le da\,A.
+\]
+\end{lemma}
+
+\begin{proof}
+The events $A_s$ are increasing and $N$ is decreasing, so $\Pr[N,A_s]\le Aa$, and the union bound gives $\delta\le
+daA$. For the lower bound, let $R_s$ be the indicator that every background term disjoint from the mate set of $t_s$
+fails, so that $N\le R_s$. The remaining background terms meet that mate set in exactly one variable; each mate lies in
+at most $D-1$ of them, so there are at most $L(D-1)$, and given $A_s=1$ each of them fires exactly when its other $L$
+variables, which are not mates of $t_s$, all equal $1$. Let $V_s$ be the event that one of these residual conjunctions
+equals $1$; it is increasing and $\Pr[V_s]\le L(D-1)a$. Since $R_s$ and $V_s$ do not depend on the mates of $t_s$,
+\[
+\Pr[N,A_s]=a\Pr[R_s,\overline{V_s}]\ge a\bigl(\Pr[R_s]-\Pr[R_s]\Pr[V_s]\bigr)\ge aA\bigl(1-L(D-1)a\bigr),
+\]
+using Harris for $R_s$ and $V_s$ and, in the last step, $\Pr[R_s]\ge A$; if $1-L(D-1)a<0$ the bound holds trivially.
+For $s\neq u$ the event $A_sA_u$ is increasing with probability $a^2$, so $\Pr[N,A_s,
+A_u]\le Aa^2$. Bonferroni's inequality gives $\delta\ge daA(1-L(D-1)a)-\binom d2a^2A=da\theta A$.
+\end{proof}
+
+For $1\le k\le L$ let $\Omega_k$ be the family of sets $T\subseteq[n]\setminus\{i\}$ that contain at least $k$ mates of
+some $t_s$, and put
+\[
+\gamma_k=a\sum_{j<k}\binom Lj.
+\]
+
+\begin{lemma}\label{lem:h}
+$\sum_{T\notin\Omega_k}\hat h(T)^2\le\min(1,d\gamma_k)\,\delta$.
+\end{lemma}
+
+\begin{proof}
+Put $h_s=N A_s\prod_{u<s}(1-A_u)$. These functions have disjoint supports and sum to $h$, so $\sum_s\|h_s\|_2^2=\delta$.
+Since $h_s$ vanishes unless $A_s=1$, $h_s=A_s\Psi_s$, where $\Psi_s$ is $N\prod_{u<s}(1-A_u)$ with the mates of $t_s$
+set to $1$, a function of the variables outside that mate set. As
+$A_s=2^{-L}\sum_{S\subseteq\text{mates}(t_s)}(-1)^{|S|}\chi_S$, every Fourier coefficient of $h_s$ has the form $\hat
+h_s(S\cup V)=\pm2^{-L}\hat\Psi_s(V)$ with $S$ a set of mates and $V$ disjoint from them. The weight of $\hat h_s^2$ on
+sets with exactly $j$ mates of $t_s$ is therefore $\binom Lj4^{-L}\|\Psi_s\|_2^2=\binom Lja\|h_s\|_2^2$, using
+$\|h_s\|_2^2=a\|\Psi_s\|_2^2$. A set outside $\Omega_k$ has fewer than $k$ mates of $t_s$, so
+$\sum_{T\notin\Omega_k}\hat h_s(T)^2\le\gamma_k\|h_s\|_2^2$. By Cauchy--Schwarz,
+\[
+\sum_{T\notin\Omega_k}\hat h(T)^2\le d\sum_s\sum_{T\notin\Omega_k}\hat h_s(T)^2\le d\gamma_k\delta.
+\]
+The bound by $\delta$ is trivial.
+\end{proof}
+
+\begin{lemma}\label{lem:N}
+If $k(D-1)a<2$, then
+\[
+\sum_{T\in\Omega_k}\hat N(T)^2\le d\,\alpha_kA,\qquad
+\alpha_k=\binom Lk\frac{2^{\binom k2-2k}\bigl((D-1)a\bigr)^k}{1-k(D-1)a/2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Every $T\in\Omega_k$ contains a set $J$ of $k$ mates of some $t_s$, and there are $d\binom Lk$ such sets $J$. For each
+of them, $\sum_{T\supseteq J}\hat N(T)^2=\|D_JN\|_2^2$, where $D_J$ is the composition of the derivatives
+$D_jN=\frac12(N|_{x_j=0}-N|_{x_j=1})$ over $j\in J$. So it suffices to show $\|D_JN\|_2^2\le\alpha_k\binom Lk^{-1}A$.
+
+Fix $J$. A background term contains at most one element of $J$. Let $R'$ be the indicator that every background term
+avoiding $J$ fails, and for $j\in J$ let $Q_j$ be the OR of the residual conjunctions, of width $L$, of the at most
+$D-1$ background terms through $j$. Neither $R'$ nor any $Q_j$ depends on the variables in $J$, and
+\[
+N=R'\prod_{j\in J}(1-x_jQ_j),\qquad D_JN=\pm R'\prod_{j\in J}\tfrac12Q_j,\qquad \|D_JN\|_2^2=4^{-k}\Pr[R',\textstyle\bigwedge_jQ_j].
+\]
+The event $\bigwedge_jQ_j$ is increasing and $R'$ decreasing, so $\Pr[R',\bigwedge_jQ_j]\le\Pr[R']\Pr[\bigwedge_jQ_j]$.
+For $\bigwedge_jQ_j$ one residual conjunction must equal $1$ for each $j$; there are at most $(D-1)^k$ choices, the
+chosen terms are distinct because each contains exactly one element of $J$, and two residual conjunctions share at most
+one variable, so their union has at least $kL-\binom k2$ variables. Hence $\Pr[\bigwedge_jQ_j]\le(D-1)^k2^{\binom
+k2}a^k$. Finally, $x_j$ is independent of $R'$ and $Q_j$, so by Harris
+\[
+A\ge\Pr[R']-\sum_{j\in J}\Pr[R',x_jQ_j]\ge\Pr[R']\Bigl(1-\sum_j\tfrac12\Pr[Q_j]\Bigr)\ge\Pr[R']\bigl(1-\tfrac12k(D-1)a\bigr).
+\]
+Combining the three displays gives $\|D_JN\|_2^2\le4^{-k}(D-1)^k2^{\binom k2}a^kA/(1-k(D-1)a/2)$.
+\end{proof}
+
+\begin{theorem}\label{thm:lin}
+Let $F$ be a $w$-uniform linear monotone DNF of degree at most $D$, $L=w-1$, $a=2^{-L}$, and let $i$ lie in $d\ge1$
+terms. Let $1\le k\le L$, and put
+\[
+\theta=1-L(D-1)a-\frac{(d-1)a}2,\qquad \varepsilon=\min(1,d\gamma_k),\qquad \kappa=\frac{\alpha_k}{a\theta},
+\]
+with $\gamma_k$ and $\alpha_k$ as above. If $\theta>0$, $k(D-1)a<2$ and $da\le1/4$, then
+\[
+\Bigl|\frac{E_i(f)}{\Inf_i(f)}-2\Bigr|\le2\varepsilon+\frac8{\ln2}\sqrt\kappa
++\varepsilon\log_2\Bigl(e\Bigl[3+\frac{8}{\varepsilon\,da\,\theta}\Bigr]\Bigr)+da\log_2\bigl(e[1+(da)^{-2}]\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Apply Proposition~\ref{prop:sep} with $\Omega=\Omega_k$, which consists of non-empty sets. Lemma~\ref{lem:h} gives the
+first hypothesis with $\varepsilon$ (note $\varepsilon\ge da>0$). Lemmas~\ref{lem:N} and~\ref{lem:A} give
+$\sum_{\Omega_k}\hat N^2\le d\alpha_kA\le\alpha_k\delta/(a\theta)=\kappa\delta$. In the upper bound, $\Var N\le\E N=A\le
+\delta/(da\theta)$, and $\delta\le daA\le da\le1/4$; the function $x\mapsto x\log_2(e[1+x^{-2}])$ is increasing on
+$(0,1/4]$, since its derivative is $\log_2(1+x^{-2})+\log_2e\,(1-2/(1+x^2))\ge\log_2 17-\log_2e>0$ there.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $k=\lfloor1/\eta\rfloor+1$, so $k\eta>1$, and let $L\to\infty$ with $D\le2^{(1-\eta)L}$. Then $Da\le2^{-\eta L}$,
+so $L(D-1)a\to0$, $\theta\to1$, $k(D-1)a<2$ and $da\le Da\le1/4$ for $L$ large, uniformly in $d\le D$. Next
+$d\gamma_k\le Da\,kL^k\le kL^k2^{-\eta L}\to0$, and
+\[
+\kappa\le\frac{2L^k2^{\binom k2}(Da)^k}{a\theta}\le\frac{2L^k2^{\binom k2}}{\theta}\,2^{(1-k\eta)L}\to0.
+\]
+In the third term, $x\mapsto x\log_2(e[3+c/x])$ is increasing, $\varepsilon\le kL^k2^{-\eta L}$, and $c=8/(da\theta)\le
+16\cdot2^L$ for $L$ large, so the term is $O(kL^{k+1}2^{-\eta L})$. The last term is at most
+$2^{-\eta L}\log_2(e[1+4^{\eta L}])=O(L2^{-\eta L})$. None of these bounds depends on $n$, on the number of terms or on
+$i$.
+\end{proof}
+
+\begin{remark}
+The two error sources pull $k$ in opposite directions. Since $\gamma_k\le kL^{k-1}a$, the weight of $h$ off $\Omega_k$ is
+small once $DkL^{k-1}\ll2^L$, which favours small $k$; the weight of $N$ on $\Omega_k$ is small once
+$L^kD^k\ll2^{(k-1)L}$ up to factors depending on $k$, which favours large $k$. With $D=2^{\beta L}$, $\beta<1$, both
+hold for $k>1/(1-\beta)$, and this is where the hypothesis $D\le2^{(1-\eta)L}$ comes from.
+\end{remark}
+
+\section{Numerical checks}\label{sec:num}
+
+All values below were computed with exact Walsh--Hadamard transforms. The script \texttt{check\_lin.py} in the
+code repository evaluates the four inequalities of Lemmas~\ref{lem:A}--\ref{lem:N} and Theorem~\ref{thm:lin} at every coordinate and every
+admissible $k$ for $17$ linear DNFs: stars of $D$ terms through one variable, the rows and columns of a $4\times4$
+array, and twelve random linear DNFs with $w\in\{4,5\}$, $D\in\{2,3,4\}$ and $16$ to $18$ variables. All $784$
+(coordinate, $k$) pairs satisfy all four inequalities, and the left side of Theorem~\ref{thm:lin} is never more than
+$0.14$ of the right side; at these widths the bound is far from tight.
+
+Table~\ref{tab:star} shows the ratio approaching $2$ as the width grows, for the star of $D$ terms of width $w$ through
+a common variable, at the centre ($d=D$) and at another variable ($d=1$). For the rows and columns of an $m\times m$
+array the ratio is $2.629$ at $m=3$ and $3.245$ at $m=4$.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrcccc}
+$D$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ other\\\hline
+2 & 4 & 7 & 0.2344 & 2.685 & 0.1094 & 2.909\\
+2 & 6 & 11 & 0.0615 & 2.450 & 0.0303 & 2.351\\
+2 & 8 & 15 & 0.0156 & 2.178 & 0.0078 & 2.118\\
+2 & 10 & 19 & 0.0039 & 2.060 & 0.0019 & 2.037\\
+3 & 5 & 13 & 0.1760 & 2.692 & 0.0549 & 2.666\\
+3 & 7 & 19 & 0.0461 & 2.378 & 0.0151 & 2.225\\
+4 & 5 & 17 & 0.2275 & 2.690 & 0.0515 & 2.728\\
+\end{tabular}
+\caption{$E_i/\Inf_i$ for the star of $D$ terms of width $w$ on $n=1+D(w-1)$ variables.}\label{tab:star}
+\end{table}
+
+\section*{Acknowledgements and funding}
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
+Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent
+memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results,
+coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see
+the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework
+repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25). Computational resources were provided in part by Google Cloud through its education credits program (credit
+530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics, and its
+results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. In November 2026 a
+Claude Fable agent (Anthropic) and Codex agents running OpenAI's GPT-6.1, connected to the Brain and working on the same
+problem, studied erasure entropies of DNFs; a Codex agent found the theorem for sparse linear DNFs and its proof.
+Claude Opus 5.5 (Anthropic) rederived each proof, wrote the numerical checks, prepared the manuscript and audited it.
+These checks are not peer review. The author directed the work and is responsible for the content of the paper and for
+decisions concerning its dissemination.
+
+\section*{Code and data availability}
+Code and outputs: \url{https://github.com/yspennstate/fei-sparse-linear-dnf}.
+
+The paper is part of the Math Brain project, whose public repository is
+\url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
+entropy and min-entropy, ACM Trans. Comput. Theory 13 (2021), arXiv:1809.09819.
+\bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
+Comput. Sci. 654 (2016), 92--112.
+\bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
+124 (1996), 2993--3002.
+\bibitem{GMP} M.~J.~Gonz\'alez, P.~MacManus, M.~C.~Pereyra, Further evidence towards the Fourier
+entropy-influence conjecture, arXiv:2606.00246, 2026.
+\bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025),
+arXiv:2312.08271.
+\bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013.
+\bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
+Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
+\bibitem{Shalev} G.~Shalev, On the Fourier entropy influence conjecture for extremal classes, arXiv:1806.03646, 2018.
+\bibitem{Shm1} Y.~Shmalo, The one-coordinate step in the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
+\bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols and the entropy-influence conjecture, ITCS 2014,
+arXiv:1312.3003.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
+October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public}.
+\end{thebibliography}
+
+\end{document}
