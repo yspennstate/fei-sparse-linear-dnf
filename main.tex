@@ -45,7 +45,9 @@ and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every 
 functions~\cite{OWZ}, for read-once formulas over gates of bounded arity~\cite{OT13} and over AND and OR
 gates~\cite{CKLS}, and for read-$k$ decision trees with $k$ fixed~\cite{WWW}; its min-entropy
 version is known for read-$k$ DNFs with $k$ fixed~\cite{Shalev,ACKSW}, and Han~\cite{Han} bounds $H(f)$ by a multiple of
-$I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$.
+$I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$. Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove a
+weaker form of the conjecture: the spectrum of a Boolean function of constant variance is concentrated on
+$2^{O(I(f)\log I(f))}$ characters.
 
 The erasure entropy (in the sense of Verd\'u and Weissman~\cite{VW08}) of $f$ at $i$ is
 \[
@@ -178,8 +180,8 @@ Put $A=\E N$.
 Two facts about linear DNFs are used repeatedly. A background term meets the mate set of $t_s$ in at most one variable,
 since it shares at most one variable with $t_s$ and does not contain $i$. And a term through a mate of $t_s$, other than
 $t_s$ itself, is a background term, since otherwise it would share two variables with $t_s$. We also use Harris's
-inequality: under a product measure, an increasing and a decreasing event are negatively correlated, and two increasing
-events are positively correlated.
+inequality~\cite{Harris}: under a product measure, an increasing and a decreasing event are negatively correlated, and
+two increasing events are positively correlated.
 
 \begin{lemma}\label{lem:A}
 With $\theta=1-L(D-1)a-(d-1)a/2$,
@@ -372,6 +374,10 @@ Comput. Sci. 654 (2016), 92--112.
 entropy-influence conjecture, arXiv:2606.00246, 2026.
 \bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025),
 arXiv:2312.08271.
+\bibitem{Harris} T.~E.~Harris, A lower bound for the critical probability in a certain percolation process, Proc.
+Cambridge Philos. Soc. 56 (1960), 13--20.
+\bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the
+Fourier-entropy conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
 Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
