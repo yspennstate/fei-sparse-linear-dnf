@@ -43,9 +43,11 @@ be a random subset with $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U
 $I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy-influence (FEI) conjecture of Friedgut
 and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
 functions~\cite{OWZ}, for read-once formulas over gates of bounded arity~\cite{OT13} and over AND and OR
-gates~\cite{CKLS}, and for read-$k$ decision trees with $k$ fixed~\cite{WWW}; its min-entropy
+gates~\cite{CKLS}, for read-$k$ decision trees with $k$ fixed~\cite{WWW}, and for linear threshold
+functions~\cite{ShmLTF}; its min-entropy
 version is known for read-$k$ DNFs with $k$ fixed~\cite{Shalev,ACKSW}, and Han~\cite{Han} bounds $H(f)$ by a multiple of
-$I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$. Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove a
+$I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, with the multiple lowered to the sharp value $1/\ln 2$ by Li
+and Han~\cite{LH25}. Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove a
 weaker form of the conjecture: the spectrum of a Boolean function of constant variance is concentrated on
 $2^{O(I(f)\log I(f))}$ characters.
 
@@ -378,6 +380,8 @@ Art.~4, doi:10.1007/s00493-024-00133-z; arXiv:2312.08271.
 Cambridge Philos. Soc. 56 (1960), 13--20.
 \bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the
 Fourier-entropy conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
+\bibitem{LH25} P.~Li, G.~Han, Strengthening Han's Fourier entropy-influence inequality via an
+information-theoretic proof, arXiv:2512.03117, 2025.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013,
 Lecture Notes in Comput. Sci. 7965, 780--791, doi:10.1007/978-3-642-39206-1\_66.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
@@ -385,6 +389,8 @@ Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
 \bibitem{Shalev} G.~Shalev, On the Fourier entropy influence conjecture for extremal classes, arXiv:1806.03646, 2018.
 \bibitem{Shm1} Y.~Shmalo, The one-coordinate step in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
+\bibitem{ShmLTF} Y.~Shmalo, Fourier entropy of threshold functions and their compositions,
+arXiv:2610.16069, 2026.
 \bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
 5030--5058.
 \bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols, and the Fourier entropy-influence conjecture, ITCS 2014,
