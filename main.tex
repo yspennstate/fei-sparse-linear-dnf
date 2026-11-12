@@ -320,10 +320,11 @@ Table~\ref{tab:star} shows the ratio approaching $2$ as the width grows, for the
 a common variable, at the centre ($d=D$) and at another variable ($d=1$). For the rows and columns of an $m\times m$
 array the ratio is $2.629$ at $m=3$ and $3.245$ at $m=4$.
 
-\begin{table}[h]
+\begin{table}[tbp]
 \centering
 \begin{tabular}{rrrcccc}
-$D$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ other\\\hline
+\toprule
+$D$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ other\\\midrule
 2 & 4 & 7 & 0.2344 & 2.685 & 0.1094 & 2.909\\
 2 & 6 & 11 & 0.0615 & 2.450 & 0.0303 & 2.351\\
 2 & 8 & 15 & 0.0156 & 2.178 & 0.0078 & 2.118\\
@@ -331,6 +332,7 @@ $D$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ othe
 3 & 5 & 13 & 0.1760 & 2.692 & 0.0549 & 2.666\\
 3 & 7 & 19 & 0.0461 & 2.378 & 0.0151 & 2.225\\
 4 & 5 & 17 & 0.2275 & 2.690 & 0.0515 & 2.728\\
+\bottomrule
 \end{tabular}
 \caption{$E_i/\Inf_i$ for the star of $D$ terms of width $w$ on $n=1+D(w-1)$ variables.}\label{tab:star}
 \end{table}
