@@ -25,14 +25,13 @@
 \begin{abstract}
 For a Boolean function $f$ and a coordinate $i$, the erasure entropy $E_i(f)$ is the conditional entropy of the event
 $i\in U$ given $U\setminus\{i\}$, where $U$ is drawn from the spectral distribution $\hat f^2$. The Fourier
-entropy-influence conjecture is equivalent to every non-constant $f$ having a coordinate with $E_i(f)=O(\Inf_i(f))$. We
-consider monotone formulas in disjunctive normal form (DNFs) whose terms all have width $w$, any two of which share at most one variable, and in which every
-variable lies in at most $D$ terms. We show that $E_i(f)/\Inf_i(f)=2+o(1)$ at every relevant coordinate, uniformly in
-the number of variables and terms, as $w\to\infty$ with $D\le2^{(1-\eta)(w-1)}$ for a fixed $\eta>0$, and we give an
-explicit error bound for each $w$, $D$ and degree of $i$. The proof rests on a separation inequality valid for every
-monotone function: if the derivative $D_if$ puts little spectral weight outside a family $\Omega$ of sets and the
-restriction $f|_{x_i=0}$ puts little weight on $\Omega$, then $E_i/\Inf_i$ is close to $2$. For a linear DNF, $\Omega$
-is the family of sets that contain many of the other variables of some term through $i$.
+entropy-influence conjecture is equivalent to every non-constant $f$ having a coordinate with $E_i(f)=O(\Inf_i(f))$.
+Consider monotone formulas in disjunctive normal form (DNFs) whose terms all have width $w$, any two of which share at
+most one variable, and in which every variable lies in at most $\Delta$ terms. We show that $E_i(f)/\Inf_i(f)=2+o(1)$
+at every relevant coordinate, uniformly in the number of variables and terms, as $w\to\infty$ with
+$\Delta\le2^{(1-\eta)(w-1)}$ for a fixed $\eta>0$, with an explicit error bound. The proof rests on a separation
+inequality, valid for every monotone function, that gives $E_i/\Inf_i$ close to $2$ whenever the derivative $D_if$
+puts little spectral weight outside a family of sets on which the restriction $f|_{x_i=0}$ puts little weight.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
@@ -67,14 +66,14 @@ removed, and at which coordinates.
 
 This paper computes the ratio $E_i/\Inf_i$ asymptotically for a class of DNFs in which the coordinates are linked by
 many terms. Let $F$ be a monotone DNF on $\{0,1\}^n$. We call $F$ \emph{linear} if any two of its terms share at most
-one variable, \emph{$w$-uniform} if all its terms have $w$ variables, and of \emph{degree at most $D$} if every
-variable lies in at most $D$ terms. Put $f=1-2F$. Read-once DNFs are the linear DNFs of degree one; a linear DNF of
-degree $D$ is read-$D$, but its terms may overlap in a pattern with many cycles, for instance the $m$ rows and $m$
+one variable, \emph{$w$-uniform} if all its terms have $w$ variables, and of \emph{degree at most $\Delta$} if every
+variable lies in at most $\Delta$ terms. Put $f=1-2F$. Read-once DNFs are the linear DNFs of degree one; a linear DNF of
+degree $\Delta$ is read-$\Delta$, but its terms may overlap in a pattern with many cycles, for instance the $m$ rows and $m$
 columns of an $m\times m$ array.
 
 \begin{theorem}\label{thm:main}
 Fix $\eta\in(0,1)$. Over all $n$, all $w$-uniform linear monotone DNFs $F$ on $\{0,1\}^n$ of degree at most
-$D\le2^{(1-\eta)(w-1)}$, and all coordinates $i$ with $\Inf_i(f)>0$,
+$\Delta\le2^{(1-\eta)(w-1)}$, and all coordinates $i$ with $\Inf_i(f)>0$,
 \[
 \sup\Bigl|\frac{E_i(f)}{\Inf_i(f)}-2\Bigr|\longrightarrow0\qquad(w\to\infty).
 \]
@@ -95,7 +94,7 @@ coefficients $\hat g(T)$ and $\hat h(T)$ have nearly the same square, and each s
 $2\hat h(T)^2$ to $E_i$. Proposition~\ref{prop:sep} makes this quantitative for every monotone function. For a linear
 DNF the family is $\Omega_k$, the sets that contain at least $k$ of the other variables of some term through $i$: the
 pivotal indicator spreads its spectral weight evenly over the subsets of the other variables of each such term (Lemma~\ref{lem:h}), while the background
-event $N$ needs $k$ further terms to reach $k$ of these variables, which costs $((D-1)2^{-(w-1)})^k$ (Lemma~\ref{lem:N}).
+event $N$ needs $k$ further terms to reach $k$ of these variables, which costs $((\Delta-1)2^{-(w-1)})^k$ (Lemma~\ref{lem:N}).
 
 Theorem~\ref{thm:main} is a statement about the ratio at every coordinate and does not prove the FEI conjecture for the
 class. The equivalence of~\cite{Shm1} needs a good coordinate in every restriction of $f$, and restrictions of a
@@ -174,7 +173,7 @@ the three parts gives the upper bound.
 
 \section{Linear DNFs}\label{sec:lin}
 
-From now on $F$ is a $w$-uniform linear monotone DNF of degree at most $D$, $f=1-2F$, $L=w-1\ge1$ and $a=2^{-L}$. Fix
+From now on $F$ is a $w$-uniform linear monotone DNF of degree at most $\Delta$, $f=1-2F$, $L=w-1\ge1$ and $a=2^{-L}$. Fix
 a coordinate $i$ that lies in $d\ge1$ terms $t_1,\dots,t_d$. The \emph{mates} of $t_s$ are its $L$ variables other than
 $i$, and $A_s$ is the indicator that all of them equal $1$. By linearity the mate sets are pairwise disjoint. A
 \emph{background term} is a term that does not contain $i$; $N$ is the indicator that every background term fails, and
@@ -190,7 +189,7 @@ inequality~\cite{Harris}: under a product measure, an increasing and a decreasin
 two increasing events are positively correlated.
 
 \begin{lemma}\label{lem:A}
-With $\theta=1-L(D-1)a-(d-1)a/2$,
+With $\theta=1-L(\Delta-1)a-(d-1)a/2$,
 \[
 da\,\theta\,A\le\delta\le da\,A.
 \]
@@ -200,15 +199,15 @@ da\,\theta\,A\le\delta\le da\,A.
 The events $A_s$ are increasing and $N$ is decreasing, so $\Pr[N,A_s]\le Aa$, and the union bound gives $\delta\le
 daA$. For the lower bound, let $R_s$ be the indicator that every background term disjoint from the mate set of $t_s$
 fails, so that $N\le R_s$. The remaining background terms meet that mate set in exactly one variable; each mate lies in
-at most $D-1$ of them, so there are at most $L(D-1)$, and given $A_s=1$ each of them fires exactly when its other $L$
+at most $\Delta-1$ of them, so there are at most $L(\Delta-1)$, and given $A_s=1$ each of them fires exactly when its other $L$
 variables, which are not mates of $t_s$, all equal $1$. Let $V_s$ be the event that one of these residual conjunctions
-equals $1$; it is increasing and $\Pr[V_s]\le L(D-1)a$. Since $R_s$ and $V_s$ do not depend on the mates of $t_s$,
+equals $1$; it is increasing and $\Pr[V_s]\le L(\Delta-1)a$. Since $R_s$ and $V_s$ do not depend on the mates of $t_s$,
 \[
-\Pr[N,A_s]=a\Pr[R_s,\overline{V_s}]\ge a\bigl(\Pr[R_s]-\Pr[R_s]\Pr[V_s]\bigr)\ge aA\bigl(1-L(D-1)a\bigr),
+\Pr[N,A_s]=a\Pr[R_s,\overline{V_s}]\ge a\bigl(\Pr[R_s]-\Pr[R_s]\Pr[V_s]\bigr)\ge aA\bigl(1-L(\Delta-1)a\bigr),
 \]
-using Harris for $R_s$ and $V_s$ and, in the last step, $\Pr[R_s]\ge A$; if $1-L(D-1)a<0$ the bound holds trivially.
+using Harris for $R_s$ and $V_s$ and, in the last step, $\Pr[R_s]\ge A$; if $1-L(\Delta-1)a<0$ the bound holds trivially.
 For $s\neq u$ the event $A_sA_u$ is increasing with probability $a^2$, so $\Pr[N,A_s,
-A_u]\le Aa^2$. Bonferroni's inequality gives $\delta\ge daA(1-L(D-1)a)-\binom d2a^2A=da\theta A$.
+A_u]\le Aa^2$. Bonferroni's inequality gives $\delta\ge daA(1-L(\Delta-1)a)-\binom d2a^2A=da\theta A$.
 \end{proof}
 
 For $1\le k\le L$ let $\Omega_k$ be the family of sets $T\subseteq[n]\setminus\{i\}$ that contain at least $k$ mates of
@@ -237,10 +236,10 @@ The bound by $\delta$ is trivial.
 \end{proof}
 
 \begin{lemma}\label{lem:N}
-If $k(D-1)a<2$, then
+If $k(\Delta-1)a<2$, then
 \[
 \sum_{T\in\Omega_k}\hat N(T)^2\le d\,\alpha_kA,\qquad
-\alpha_k=\binom Lk\frac{2^{\binom k2-2k}\bigl((D-1)a\bigr)^k}{1-k(D-1)a/2}.
+\alpha_k=\binom Lk\frac{2^{\binom k2-2k}\bigl((\Delta-1)a\bigr)^k}{1-k(\Delta-1)a/2}.
 \]
 \end{lemma}
 
@@ -251,28 +250,28 @@ $D_jN=\frac12(N|_{x_j=0}-N|_{x_j=1})$ over $j\in J$. So it suffices to show $\|D
 
 Fix $J$. A background term contains at most one element of $J$. Let $R'$ be the indicator that every background term
 avoiding $J$ fails, and for $j\in J$ let $Q_j$ be the OR of the residual conjunctions, of width $L$, of the at most
-$D-1$ background terms through $j$. Neither $R'$ nor any $Q_j$ depends on the variables in $J$, and
+$\Delta-1$ background terms through $j$. Neither $R'$ nor any $Q_j$ depends on the variables in $J$, and
 \[
 N=R'\prod_{j\in J}(1-x_jQ_j),\qquad D_JN=\pm R'\prod_{j\in J}\tfrac12Q_j,\qquad \|D_JN\|_2^2=4^{-k}\Pr[R',\textstyle\bigwedge_jQ_j].
 \]
 The event $\bigwedge_jQ_j$ is increasing and $R'$ decreasing, so $\Pr[R',\bigwedge_jQ_j]\le\Pr[R']\Pr[\bigwedge_jQ_j]$.
-For $\bigwedge_jQ_j$ one residual conjunction must equal $1$ for each $j$; there are at most $(D-1)^k$ choices, the
+For $\bigwedge_jQ_j$ one residual conjunction must equal $1$ for each $j$; there are at most $(\Delta-1)^k$ choices, the
 chosen terms are distinct because each contains exactly one element of $J$, and two residual conjunctions share at most
-one variable, so their union has at least $kL-\binom k2$ variables. Hence $\Pr[\bigwedge_jQ_j]\le(D-1)^k2^{\binom
+one variable, so their union has at least $kL-\binom k2$ variables. Hence $\Pr[\bigwedge_jQ_j]\le(\Delta-1)^k2^{\binom
 k2}a^k$. Finally, $x_j$ is independent of $R'$ and $Q_j$, so by Harris
 \[
-A\ge\Pr[R']-\sum_{j\in J}\Pr[R',x_jQ_j]\ge\Pr[R']\Bigl(1-\sum_j\tfrac12\Pr[Q_j]\Bigr)\ge\Pr[R']\bigl(1-\tfrac12k(D-1)a\bigr).
+A\ge\Pr[R']-\sum_{j\in J}\Pr[R',x_jQ_j]\ge\Pr[R']\Bigl(1-\sum_j\tfrac12\Pr[Q_j]\Bigr)\ge\Pr[R']\bigl(1-\tfrac12k(\Delta-1)a\bigr).
 \]
-Combining the three displays gives $\|D_JN\|_2^2\le4^{-k}(D-1)^k2^{\binom k2}a^kA/(1-k(D-1)a/2)$.
+Combining the three displays gives $\|D_JN\|_2^2\le4^{-k}(\Delta-1)^k2^{\binom k2}a^kA/(1-k(\Delta-1)a/2)$.
 \end{proof}
 
 \begin{theorem}\label{thm:lin}
-Let $F$ be a $w$-uniform linear monotone DNF of degree at most $D$, $L=w-1$, $a=2^{-L}$, and let $i$ lie in $d\ge1$
+Let $F$ be a $w$-uniform linear monotone DNF of degree at most $\Delta$, $L=w-1$, $a=2^{-L}$, and let $i$ lie in $d\ge1$
 terms. Let $1\le k\le L$, and put
 \[
-\theta=1-L(D-1)a-\frac{(d-1)a}2,\qquad \varepsilon=\min(1,d\gamma_k),\qquad \kappa=\frac{\alpha_k}{a\theta},
+\theta=1-L(\Delta-1)a-\frac{(d-1)a}2,\qquad \varepsilon=\min(1,d\gamma_k),\qquad \kappa=\frac{\alpha_k}{a\theta},
 \]
-with $\gamma_k$ and $\alpha_k$ as above. If $\theta>0$, $k(D-1)a<2$ and $da\le1/4$, then
+with $\gamma_k$ and $\alpha_k$ as above. If $\theta>0$, $k(\Delta-1)a<2$ and $da\le1/4$, then
 \[
 \Bigl|\frac{E_i(f)}{\Inf_i(f)}-2\Bigr|\le2\varepsilon+\frac8{\ln2}\sqrt\kappa
 +\varepsilon\log_2\Bigl(e\Bigl[3+\frac{8}{\varepsilon\,da\,\theta}\Bigr]\Bigr)+da\log_2\bigl(e[1+(da)^{-2}]\bigr).
@@ -288,11 +287,11 @@ $(0,1/4]$, since its derivative is $\log_2(1+x^{-2})+\log_2e\,(1-2/(1+x^2))\ge\l
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-Let $k=\lfloor1/\eta\rfloor+1$, so $k\eta>1$, and let $L\to\infty$ with $D\le2^{(1-\eta)L}$. Then $Da\le2^{-\eta L}$,
-so $L(D-1)a\to0$, $\theta\to1$, $k(D-1)a<2$ and $da\le Da\le1/4$ for $L$ large, uniformly in $d\le D$. Next
-$d\gamma_k\le Da\,kL^k\le kL^k2^{-\eta L}\to0$, and
+Let $k=\lfloor1/\eta\rfloor+1$, so $k\eta>1$, and let $L\to\infty$ with $\Delta\le2^{(1-\eta)L}$. Then $\Delta a\le2^{-\eta L}$,
+so $L(\Delta-1)a\to0$, $\theta\to1$, $k(\Delta-1)a<2$ and $da\le \Delta a\le1/4$ for $L$ large, uniformly in $d\le \Delta$. Next
+$d\gamma_k\le \Delta a\,kL^k\le kL^k2^{-\eta L}\to0$, and
 \[
-\kappa\le\frac{2L^k2^{\binom k2}(Da)^k}{a\theta}\le\frac{2L^k2^{\binom k2}}{\theta}\,2^{(1-k\eta)L}\to0.
+\kappa\le\frac{2L^k2^{\binom k2}(\Delta a)^k}{a\theta}\le\frac{2L^k2^{\binom k2}}{\theta}\,2^{(1-k\eta)L}\to0.
 \]
 In the third term, $x\mapsto x\log_2(e[3+c/x])$ is increasing, $\varepsilon\le kL^k2^{-\eta L}$, and $c=8/(da\theta)\le
 16\cdot2^L$ for $L$ large, so the term is $O(kL^{k+1}2^{-\eta L})$. The last term is at most
@@ -302,29 +301,29 @@ $i$.
 
 \begin{remark}
 The two error sources pull $k$ in opposite directions. Since $\gamma_k\le kL^{k-1}a$, the weight of $h$ off $\Omega_k$ is
-small once $DkL^{k-1}\ll2^L$, which favours small $k$; the weight of $N$ on $\Omega_k$ is small once
-$L^kD^k\ll2^{(k-1)L}$ up to factors depending on $k$, which favours large $k$. With $D=2^{\beta L}$, $\beta<1$, both
-hold for $k>1/(1-\beta)$, and this is where the hypothesis $D\le2^{(1-\eta)L}$ comes from.
+small once $\Delta kL^{k-1}\ll2^L$, which favours small $k$; the weight of $N$ on $\Omega_k$ is small once
+$L^kD^k\ll2^{(k-1)L}$ up to factors depending on $k$, which favours large $k$. With $\Delta=2^{\beta L}$, $\beta<1$, both
+hold for $k>1/(1-\beta)$, and this is where the hypothesis $\Delta\le2^{(1-\eta)L}$ comes from.
 \end{remark}
 
 \section{Numerical checks}\label{sec:num}
 
 All values below were computed with exact Walsh--Hadamard transforms. The script \texttt{check\_lin.py} in the
 code repository evaluates the four inequalities of Lemmas~\ref{lem:A}--\ref{lem:N} and Theorem~\ref{thm:lin} at every coordinate and every
-admissible $k$ for $17$ linear DNFs: stars of $D$ terms through one variable, the rows and columns of a $4\times4$
-array, and twelve random linear DNFs with $w\in\{4,5\}$, $D\in\{2,3,4\}$ and $16$ to $18$ variables. All $784$
+admissible $k$ for $17$ linear DNFs: stars of $\Delta$ terms through one variable, the rows and columns of a $4\times4$
+array, and twelve random linear DNFs with $w\in\{4,5\}$, $\Delta\in\{2,3,4\}$ and $16$ to $18$ variables. All $784$
 (coordinate, $k$) pairs satisfy all four inequalities, and the left side of Theorem~\ref{thm:lin} is never more than
 $0.14$ of the right side; at these widths the bound is far from tight.
 
-Table~\ref{tab:star} shows the ratio approaching $2$ as the width grows, for the star of $D$ terms of width $w$ through
-a common variable, at the centre ($d=D$) and at another variable ($d=1$). For the rows and columns of an $m\times m$
+Table~\ref{tab:star} shows the ratio approaching $2$ as the width grows, for the star of $\Delta$ terms of width $w$ through
+a common variable, at the centre ($d=\Delta$) and at another variable ($d=1$). For the rows and columns of an $m\times m$
 array the ratio is $2.629$ at $m=3$ and $3.245$ at $m=4$.
 
 \begin{table}[tbp]
 \centering
 \begin{tabular}{rrrcccc}
 \toprule
-$D$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ other\\\midrule
+$\Delta$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ other\\\midrule
 2 & 4 & 7 & 0.2344 & 2.685 & 0.1094 & 2.909\\
 2 & 6 & 11 & 0.0615 & 2.450 & 0.0303 & 2.351\\
 2 & 8 & 15 & 0.0156 & 2.178 & 0.0078 & 2.118\\
@@ -334,7 +333,7 @@ $D$ & $w$ & $n$ & $\Inf$ centre & $E/\Inf$ centre & $\Inf$ other & $E/\Inf$ othe
 4 & 5 & 17 & 0.2275 & 2.690 & 0.0515 & 2.728\\
 \bottomrule
 \end{tabular}
-\caption{$E_i/\Inf_i$ for the star of $D$ terms of width $w$ on $n=1+D(w-1)$ variables.}\label{tab:star}
+\caption{$E_i/\Inf_i$ for the star of $\Delta$ terms of width $w$ on $n=1+\Delta(w-1)$ variables.}\label{tab:star}
 \end{table}
 
 \section*{Acknowledgements and funding}
@@ -373,7 +372,7 @@ The paper is part of the Math Brain project, whose public repository is
 \section{Notation}\label{app:notation}
 
 Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters
-$c$, $k$ and $S$ are reused, and each meaning has its own row; $D$ is the degree bound, and $D_j$, $D_J$ are derivatives.
+$c$, $k$ and $S$ are reused, and each meaning has its own row.
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
 \toprule
@@ -391,9 +390,9 @@ $E_i(f)$ & the erasure entropy $H(\mathbf 1[i\in U]\mid U\setminus\{i\})$ & Sect
 $c$ & an absolute constant, as in $E_i(f)\le c\,\Inf_i(f)$ & Section~\ref{sec:intro} \\
 $h_2$ & the binary entropy & Section~\ref{sec:intro} \\
 $F$ & a monotone DNF on $\{0,1\}^n$ & Section~\ref{sec:intro} \\
-$w$, $D$ & the width of every term, and the largest number of terms through one variable & Section~\ref{sec:intro} \\
+$w$, $\Delta$ & the width of every term, and the largest number of terms through one variable & Section~\ref{sec:intro} \\
 $m$ & the side of the $m\times m$ array whose rows and columns are the terms & Section~\ref{sec:intro} \\
-$\eta$ & a fixed number in $(0,1)$, as in $D\le2^{(1-\eta)(w-1)}$ & Theorem~\ref{thm:main} \\
+$\eta$ & a fixed number in $(0,1)$, as in $\Delta\le2^{(1-\eta)(w-1)}$ & Theorem~\ref{thm:main} \\
 $k$ & the number of variables of an AND, less one, in the comparison with a single AND & Section~\ref{sec:intro} \\
 $\Phi(a,b)$ & $\ell(a)+\ell(b)-\ell(a+b)$, with $\ell$ as below & Section~\ref{sec:intro} \\
 $g$, $h$ & the even and odd parts $\frac12(f^{(0)}\pm f^{(1)})$ of $f$ in $x_i$ & Section~\ref{sec:intro} \\
@@ -415,11 +414,11 @@ $d$, $t_1,\dots,t_d$ & the number of terms through $i$, and those terms & Sectio
 mates, $A_s$ & the $L$ variables of $t_s$ other than $i$, and the indicator that all of them equal $1$ & Section~\ref{sec:lin} \\
 background term & a term that does not contain $i$ & Section~\ref{sec:lin} \\
 $A$ & $\E N$ & Section~\ref{sec:lin} \\
-$\theta$ & $1-L(D-1)a-(d-1)a/2$ & Lemma~\ref{lem:A} \\
+$\theta$ & $1-L(\Delta-1)a-(d-1)a/2$ & Lemma~\ref{lem:A} \\
 $R_s$, $V_s$ & the indicator that every background term disjoint from the mates of $t_s$ fails, and the event that one residual conjunction of the others equals $1$ & Lemma~\ref{lem:A} \\
 $k$ & the number of mates that puts a set in $\Omega_k$, $1\le k\le L$ & Section~\ref{sec:lin} \\
 $\gamma_k$ & $a\sum_{j<k}\binom Lj$ & Section~\ref{sec:lin} \\
-$\beta$ & the exponent in $D=2^{\beta L}$, $\beta<1$, in the closing remark & Section~\ref{sec:lin} \\
+$\beta$ & the exponent in $\Delta=2^{\beta L}$, $\beta<1$, in the closing remark & Section~\ref{sec:lin} \\
 $h_s$, $\Psi_s$ & $NA_s\prod_{u<s}(1-A_u)$, and the same product with the mates of $t_s$ set to $1$ & Lemma~\ref{lem:h} \\
 $S$, $V$ & a set of mates of $t_s$, and a set disjoint from them, in the proof & Lemma~\ref{lem:h} \\
 $\alpha_k$ & the constant bounding the weight of $N$ on $\Omega_k$ & Lemma~\ref{lem:N} \\
