@@ -1,6 +1,7 @@
 \documentclass[11pt]{amsart}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1.1in]{geometry}
+\usepackage{array,longtable,booktabs}
 \usepackage{hyperref}
 \emergencystretch=2em
 
@@ -38,7 +39,7 @@ is the family of sets that contain many of the other variables of some term thro
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ with $\chi_S(x)=(-1)^{\sum_{j\in S}x_j}$, and let $U$
 be a random subset with $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U)$ and the total influence is
@@ -108,7 +109,7 @@ g=\tfrac12\bigl(f^{(0)}+f^{(1)}\bigr),\qquad h=\tfrac12\bigl(f^{(0)}-f^{(1)}\big
 Then $\hat g(T)=\hat f(T)$ and $\hat h(T)=\hat f(T\cup\{i\})$ for $T\subseteq[n]\setminus\{i\}$, and $\E
 h^2=\Inf_i(f)=:\delta$. Put $p(T)=\hat g(T)^2$ and $q(T)=\hat h(T)^2$, and
 \[
-\Phi(a,b)=\eta(a)+\eta(b)-\eta(a+b),\qquad \eta(x)=-x\log_2x.
+\Phi(a,b)=\ell(a)+\ell(b)-\ell(a+b),\qquad \ell(x)=-x\log_2x.
 \]
 Since $(U\setminus\{i\},\mathbf 1[i\in U])$ takes the value $(T,0)$ with probability $p(T)$ and $(T,1)$ with probability
 $q(T)$, we have $E_i(f)=\sum_T\Phi(p(T),q(T))$. The function $\Phi$ is concave, homogeneous of degree one, increasing in
@@ -366,6 +367,65 @@ Code and outputs: \url{https://github.com/yspennstate/fei-sparse-linear-dnf}.
 
 The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\appendix
+\section{Notation}\label{app:notation}
+
+Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters
+$c$, $k$ and $S$ are reused, and each meaning has its own row; $D$ is the degree bound, and $D_j$, $D_J$ are derivatives.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
+\toprule
+Symbol & Meaning & First appears \\
+\midrule
+\endhead
+$f$ & a Boolean function $\{0,1\}^n\to\{-1,1\}$; for a DNF $F$, $f=1-2F$ & Section~\ref{sec:intro} \\
+$\hat f(S)$, $\chi_S$ & the Fourier coefficient of $f$ at $S$, and the character $(-1)^{\sum_{j\in S}x_j}$ & Section~\ref{sec:intro} \\
+$U$ & a random subset of $[n]$ with $\Pr[U=S]=\hat f(S)^2$ & Section~\ref{sec:intro} \\
+$H(f)$ & the Fourier entropy $H(U)$ & Section~\ref{sec:intro} \\
+$\Inf_i(f)$, $I(f)$ & the influence $\Pr[i\in U]$ of $i$, and the total influence $\E|U|$ & Section~\ref{sec:intro} \\
+$C$ & an absolute constant, as in $H(f)\le C\,I(f)$ & Section~\ref{sec:intro} \\
+$k$ & the number of times a decision tree or DNF may read a variable, in read-$k$ & Section~\ref{sec:intro} \\
+$E_i(f)$ & the erasure entropy $H(\mathbf 1[i\in U]\mid U\setminus\{i\})$ & Section~\ref{sec:intro} \\
+$c$ & an absolute constant, as in $E_i(f)\le c\,\Inf_i(f)$ & Section~\ref{sec:intro} \\
+$h_2$ & the binary entropy & Section~\ref{sec:intro} \\
+$F$ & a monotone DNF on $\{0,1\}^n$ & Section~\ref{sec:intro} \\
+$w$, $D$ & the width of every term, and the largest number of terms through one variable & Section~\ref{sec:intro} \\
+$m$ & the side of the $m\times m$ array whose rows and columns are the terms & Section~\ref{sec:intro} \\
+$\eta$ & a fixed number in $(0,1)$, as in $D\le2^{(1-\eta)(w-1)}$ & Theorem~\ref{thm:main} \\
+$k$ & the number of variables of an AND, less one, in the comparison with a single AND & Section~\ref{sec:intro} \\
+$\Phi(a,b)$ & $\ell(a)+\ell(b)-\ell(a+b)$, with $\ell$ as below & Section~\ref{sec:intro} \\
+$g$, $h$ & the even and odd parts $\frac12(f^{(0)}\pm f^{(1)})$ of $f$ in $x_i$ & Section~\ref{sec:intro} \\
+$N$ & the indicator that $F$ vanishes at $x_i=0$ (for a linear DNF, that every background term fails) & Section~\ref{sec:intro} \\
+$\Omega$ & a family of non-empty sets on which $h$ has most of its weight and $N$ little & Section~\ref{sec:intro} \\
+$\Omega_k$ & the sets containing at least $k$ mates of some term through $i$ & Section~\ref{sec:intro} \\
+$f^{(b)}$ & the restriction $x_i=b$ & Section~\ref{sec:sep} \\
+$T$ & a subset of $[n]\setminus\{i\}$ & Section~\ref{sec:intro} \\
+$\delta$ & the influence $\Inf_i(f)=\E h^2$ & Section~\ref{sec:sep} \\
+$p(T)$, $q(T)$ & $\hat g(T)^2$ and $\hat h(T)^2$ & Section~\ref{sec:sep} \\
+$\ell(x)$ & $-x\log_2x$ & Section~\ref{sec:sep} \\
+$M$ & the indicator that $F$ vanishes at $x_i=1$ & Section~\ref{sec:sep} \\
+$\varepsilon$, $\kappa$ & the weight of $h$ off $\Omega$ and the weight of $N$ on $\Omega$, as fractions of $\delta$ & Proposition~\ref{prop:sep} \\
+$P$, $Q$ & the sums of $p$ and $q$ over the non-empty sets outside $\Omega$, in the proof & Proposition~\ref{prop:sep} \\
+$c$ & $8\Var N+3\varepsilon\delta$, in the proof & Proposition~\ref{prop:sep} \\
+$L$, $a$ & $w-1$ and $2^{-L}$ & Section~\ref{sec:lin} \\
+$d$, $t_1,\dots,t_d$ & the number of terms through $i$, and those terms & Section~\ref{sec:lin} \\
+mates, $A_s$ & the $L$ variables of $t_s$ other than $i$, and the indicator that all of them equal $1$ & Section~\ref{sec:lin} \\
+background term & a term that does not contain $i$ & Section~\ref{sec:lin} \\
+$A$ & $\E N$ & Section~\ref{sec:lin} \\
+$\theta$ & $1-L(D-1)a-(d-1)a/2$ & Lemma~\ref{lem:A} \\
+$R_s$, $V_s$ & the indicator that every background term disjoint from the mates of $t_s$ fails, and the event that one residual conjunction of the others equals $1$ & Lemma~\ref{lem:A} \\
+$k$ & the number of mates that puts a set in $\Omega_k$, $1\le k\le L$ & Section~\ref{sec:lin} \\
+$\gamma_k$ & $a\sum_{j<k}\binom Lj$ & Section~\ref{sec:lin} \\
+$\beta$ & the exponent in $D=2^{\beta L}$, $\beta<1$, in the closing remark & Section~\ref{sec:lin} \\
+$h_s$, $\Psi_s$ & $NA_s\prod_{u<s}(1-A_u)$, and the same product with the mates of $t_s$ set to $1$ & Lemma~\ref{lem:h} \\
+$S$, $V$ & a set of mates of $t_s$, and a set disjoint from them, in the proof & Lemma~\ref{lem:h} \\
+$\alpha_k$ & the constant bounding the weight of $N$ on $\Omega_k$ & Lemma~\ref{lem:N} \\
+$J$ & a set of $k$ mates of one term through $i$ & Lemma~\ref{lem:N} \\
+$D_j$, $D_J$ & the derivative $\frac12(N|_{x_j=0}-N|_{x_j=1})$ in $x_j$, and the composition of these over $j\in J$ & Lemma~\ref{lem:N} \\
+$R'$, $Q_j$ & the indicator that every background term avoiding $J$ fails, and the OR of the residual conjunctions of the background terms through $j$ & Lemma~\ref{lem:N} \\
+\bottomrule
+\end{longtable}
 
 \begin{thebibliography}{99}
 \bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
