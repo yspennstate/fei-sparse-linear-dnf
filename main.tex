@@ -120,7 +120,7 @@ each argument, and $\Phi(b,b)=2b$. Writing $\Phi(a,b)=a\log_2(1+b/a)+b\log_2(1+a
 \end{equation}
 
 Now let $F$ be monotone increasing and $f=1-2F$. Put $N=(1+f^{(0)})/2$ and $M=(1+f^{(1)})/2$, the indicators that $F$
-vanishes at $x_i=0$ and at $x_i=1$. Then $M\le N$, $h=N-M$ is the indicator that $i$ is pivotal, $\hat
+vanishes at $x_i=0$ and at $x_i=1$, and $\Var N=\sum_{T\ne\emptyset}\hat N(T)^2$ is the variance of $N$. Then $M\le N$, $h=N-M$ is the indicator that $i$ is pivotal, $\hat
 h(\emptyset)=\E h=\delta$, and
 \[
 g=N+M-1=2N-1-h,\qquad \hat g(T)=2\hat N(T)-\hat h(T)\quad(T\neq\emptyset).
@@ -398,6 +398,7 @@ $k$ & the number of variables of an AND, less one, in the comparison with a sing
 $\Phi(a,b)$ & $\ell(a)+\ell(b)-\ell(a+b)$, with $\ell$ as below & Section~\ref{sec:intro} \\
 $g$, $h$ & the even and odd parts $\frac12(f^{(0)}\pm f^{(1)})$ of $f$ in $x_i$ & Section~\ref{sec:intro} \\
 $N$ & the indicator that $F$ vanishes at $x_i=0$ (for a linear DNF, that every background term fails) & Section~\ref{sec:intro} \\
+$\Var N$ & the variance $\sum_{T\ne\emptyset}\hat N(T)^2$ of $N$ & Section~\ref{sec:sep} \\
 $\Omega$ & a family of non-empty sets on which $h$ has most of its weight and $N$ little & Section~\ref{sec:intro} \\
 $\Omega_k$ & the sets containing at least $k$ mates of some term through $i$ & Section~\ref{sec:intro} \\
 $f^{(b)}$ & the restriction $x_i=b$ & Section~\ref{sec:sep} \\
