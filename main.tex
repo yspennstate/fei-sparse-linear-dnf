@@ -46,9 +46,9 @@ be a random subset with $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U
 $I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy-influence (FEI) conjecture of Friedgut
 and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
 functions~\cite{OWZ} and for read-once formulas, over gates of bounded arity~\cite{OT13} and over AND and OR
-gates~\cite{CKLS}. It was proved for read-$k$ decision trees with $k$ fixed in~\cite{WWW} and for linear threshold
+gates~\cite{CKLS}. It was proved for decision trees that read each variable a bounded number of times in~\cite{WWW} and for linear threshold
 functions in~\cite{ShmLTF}. Its min-entropy
-version is known for read-$k$ DNFs with $k$ fixed~\cite{Shalev,ACKSW}, and Han~\cite{Han} bounds $H(f)$ by a multiple of
+version is known for DNFs that read each variable a bounded number of times~\cite{Shalev,ACKSW}, and Han~\cite{Han} bounds $H(f)$ by a multiple of
 $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, with the multiple lowered to the sharp value $1/\ln 2$ by Li
 and Han~\cite{LH25}. Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove a
 weaker form of the conjecture: the spectrum of a Boolean function of constant variance is concentrated on
@@ -82,8 +82,8 @@ In particular $\sum_iE_i(f)=(2+o(1))\,I(f)$ on this class.
 
 Theorem~\ref{thm:main} follows from an explicit inequality, Theorem~\ref{thm:lin}, valid for each width, degree and
 coordinate. The value $2$ is the limit of $E_i/\Inf_i$ for a coordinate inside one long AND that nothing else touches:
-for an AND of $k+1$ variables a direct computation gives $E_i/\Inf_i=2(1-2^{-k})+2^k\Phi\bigl((1-2^{-k})^2,4^{-k}\bigr)$
-at each of them (with $\Phi$ as in Section~\ref{sec:sep}), which differs from $2$ by at most $2^{-k}(2k+2)$. Theorem~\ref{thm:main} says that in a sparse
+for an AND of $r+1$ variables a direct computation gives $E_i/\Inf_i=2(1-2^{-r})+2^r\Phi\bigl((1-2^{-r})^2,4^{-r}\bigr)$
+at each of them (with $\Phi$ as in Section~\ref{sec:sep}), which differs from $2$ by at most $2^{-r}(2r+2)$. Theorem~\ref{thm:main} says that in a sparse
 linear DNF every coordinate behaves like that, however many terms pass through it and however the terms around it
 overlap.
 
@@ -162,9 +162,9 @@ and from $p=(2\hat N-\hat h)^2\le8\hat N^2+2\hat h^2$ we get $P\le8\Var N+2\vare
 Jensen's inequality for the concave function $t\mapsto\log_2t$,
 \[
 \sum\Phi(p,q)\le\sum q\log_2\Bigl(e\,\frac{p+q}{q}\Bigr)\le Q\log_2\Bigl(e\,\frac{P+Q}{Q}\Bigr)\le
-Q\log_2\Bigl(e\,\frac{c}{Q}\Bigr),\qquad c=8\Var N+3\varepsilon\delta.
+Q\log_2\Bigl(e\,\frac{B}{Q}\Bigr),\qquad B=8\Var N+3\varepsilon\delta.
 \]
-The last expression increases in $Q$ on $(0,c]$, so it is at most
+The last expression increases in $Q$ on $(0,B]$, so it is at most
 $\varepsilon\delta\log_2(e[3+8\Var N/(\varepsilon\delta)])$.
 
 At $T=\emptyset$, $q=\delta^2$ and $p\le1$, so~\eqref{eq:phiq} gives $\Phi\le\delta^2\log_2(e[1+\delta^{-2}])$. Adding
@@ -224,8 +224,8 @@ $\sum_{T\notin\Omega_k}\hat h(T)^2\le\min(1,d\gamma_k)\,\delta$.
 Put $h_s=N A_s\prod_{u<s}(1-A_u)$. These functions have disjoint supports and sum to $h$, so $\sum_s\|h_s\|_2^2=\delta$.
 Since $h_s$ vanishes unless $A_s=1$, $h_s=A_s\Psi_s$, where $\Psi_s$ is $N\prod_{u<s}(1-A_u)$ with the mates of $t_s$
 set to $1$, a function of the variables outside that mate set. As
-$A_s=2^{-L}\sum_{S\subseteq\text{mates}(t_s)}(-1)^{|S|}\chi_S$, every Fourier coefficient of $h_s$ has the form $\hat
-h_s(S\cup V)=\pm2^{-L}\hat\Psi_s(V)$ with $S$ a set of mates and $V$ disjoint from them. The weight of $\hat h_s^2$ on
+$A_s=2^{-L}\sum_{Y\subseteq\text{mates}(t_s)}(-1)^{|Y|}\chi_Y$, every Fourier coefficient of $h_s$ has the form $\hat
+h_s(Y\cup V)=\pm2^{-L}\hat\Psi_s(V)$ with $Y$ a set of mates and $V$ disjoint from them. The weight of $\hat h_s^2$ on
 sets with exactly $j$ mates of $t_s$ is therefore $\binom Lj4^{-L}\|\Psi_s\|_2^2=\binom Lja\|h_s\|_2^2$, using
 $\|h_s\|_2^2=a\|\Psi_s\|_2^2$. A set outside $\Omega_k$ has fewer than $k$ mates of $t_s$, so
 $\sum_{T\notin\Omega_k}\hat h_s(T)^2\le\gamma_k\|h_s\|_2^2$. By Cauchy--Schwarz,
@@ -293,7 +293,7 @@ $d\gamma_k\le \Delta a\,kL^k\le kL^k2^{-\eta L}\to0$, and
 \[
 \kappa\le\frac{2L^k2^{\binom k2}(\Delta a)^k}{a\theta}\le\frac{2L^k2^{\binom k2}}{\theta}\,2^{(1-k\eta)L}\to0.
 \]
-In the third term, $x\mapsto x\log_2(e[3+c/x])$ is increasing, $\varepsilon\le kL^k2^{-\eta L}$, and $c=8/(da\theta)\le
+In the third term, $x\mapsto x\log_2(e[3+K/x])$ is increasing, $\varepsilon\le kL^k2^{-\eta L}$, and $K=8/(da\theta)\le
 16\cdot2^L$ for $L$ large, so the term is $O(kL^{k+1}2^{-\eta L})$. The last term is at most
 $2^{-\eta L}\log_2(e[1+4^{\eta L}])=O(L2^{-\eta L})$. None of these bounds depends on $n$, on the number of terms or on
 $i$.
@@ -371,8 +371,7 @@ The paper is part of the Math Brain project, whose public repository is
 \appendix
 \section{Notation}\label{app:notation}
 
-Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters
-$c$, $k$ and $S$ are reused, and each meaning has its own row.
+Symbols are listed roughly in the order in which they first appear, and the last column gives that place.
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
 \toprule
@@ -385,7 +384,6 @@ $U$ & a random subset of $[n]$ with $\Pr[U=S]=\hat f(S)^2$ & Section~\ref{sec:in
 $H(f)$ & the Fourier entropy $H(U)$ & Section~\ref{sec:intro} \\
 $\Inf_i(f)$, $I(f)$ & the influence $\Pr[i\in U]$ of $i$, and the total influence $\E|U|$ & Section~\ref{sec:intro} \\
 $C$ & an absolute constant, as in $H(f)\le C\,I(f)$ & Section~\ref{sec:intro} \\
-$k$ & the number of times a decision tree or DNF may read a variable, in read-$k$ & Section~\ref{sec:intro} \\
 $E_i(f)$ & the erasure entropy $H(\mathbf 1[i\in U]\mid U\setminus\{i\})$ & Section~\ref{sec:intro} \\
 $c$ & an absolute constant, as in $E_i(f)\le c\,\Inf_i(f)$ & Section~\ref{sec:intro} \\
 $h_2$ & the binary entropy & Section~\ref{sec:intro} \\
@@ -393,7 +391,7 @@ $F$ & a monotone DNF on $\{0,1\}^n$ & Section~\ref{sec:intro} \\
 $w$, $\Delta$ & the width of every term, and the largest number of terms through one variable & Section~\ref{sec:intro} \\
 $m$ & the side of the $m\times m$ array whose rows and columns are the terms & Section~\ref{sec:intro} \\
 $\eta$ & a fixed number in $(0,1)$, as in $\Delta\le2^{(1-\eta)(w-1)}$ & Theorem~\ref{thm:main} \\
-$k$ & the number of variables of an AND, less one, in the comparison with a single AND & Section~\ref{sec:intro} \\
+$r$ & the number of variables of an AND, less one, in the comparison with a single AND & Section~\ref{sec:intro} \\
 $\Phi(a,b)$ & $\ell(a)+\ell(b)-\ell(a+b)$, with $\ell$ as below & Section~\ref{sec:intro} \\
 $g$, $h$ & the even and odd parts $\frac12(f^{(0)}\pm f^{(1)})$ of $f$ in $x_i$ & Section~\ref{sec:intro} \\
 $N$ & the indicator that $F$ vanishes at $x_i=0$ (for a linear DNF, that every background term fails) & Section~\ref{sec:intro} \\
@@ -408,7 +406,7 @@ $\ell(x)$ & $-x\log_2x$ & Section~\ref{sec:sep} \\
 $M$ & the indicator that $F$ vanishes at $x_i=1$ & Section~\ref{sec:sep} \\
 $\varepsilon$, $\kappa$ & the weight of $h$ off $\Omega$ and the weight of $N$ on $\Omega$, as fractions of $\delta$ & Proposition~\ref{prop:sep} \\
 $P$, $Q$ & the sums of $p$ and $q$ over the non-empty sets outside $\Omega$, in the proof & Proposition~\ref{prop:sep} \\
-$c$ & $8\Var N+3\varepsilon\delta$, in the proof & Proposition~\ref{prop:sep} \\
+$B$ & $8\Var N+3\varepsilon\delta$, in the proof & Proposition~\ref{prop:sep} \\
 $L$, $a$ & $w-1$ and $2^{-L}$ & Section~\ref{sec:lin} \\
 $d$, $t_1,\dots,t_d$ & the number of terms through $i$, and those terms & Section~\ref{sec:lin} \\
 mates, $A_s$ & the $L$ variables of $t_s$ other than $i$, and the indicator that all of them equal $1$ & Section~\ref{sec:lin} \\
@@ -420,11 +418,12 @@ $k$ & the number of mates that puts a set in $\Omega_k$, $1\le k\le L$ & Section
 $\gamma_k$ & $a\sum_{j<k}\binom Lj$ & Section~\ref{sec:lin} \\
 $\beta$ & the exponent in $\Delta=2^{\beta L}$, $\beta<1$, in the closing remark & Section~\ref{sec:lin} \\
 $h_s$, $\Psi_s$ & $NA_s\prod_{u<s}(1-A_u)$, and the same product with the mates of $t_s$ set to $1$ & Lemma~\ref{lem:h} \\
-$S$, $V$ & a set of mates of $t_s$, and a set disjoint from them, in the proof & Lemma~\ref{lem:h} \\
+$Y$, $V$ & a set of mates of $t_s$, and a set disjoint from them, in the proof & Lemma~\ref{lem:h} \\
 $\alpha_k$ & the constant bounding the weight of $N$ on $\Omega_k$ & Lemma~\ref{lem:N} \\
 $J$ & a set of $k$ mates of one term through $i$ & Lemma~\ref{lem:N} \\
 $D_j$, $D_J$ & the derivative $\frac12(N|_{x_j=0}-N|_{x_j=1})$ in $x_j$, and the composition of these over $j\in J$ & Lemma~\ref{lem:N} \\
 $R'$, $Q_j$ & the indicator that every background term avoiding $J$ fails, and the OR of the residual conjunctions of the background terms through $j$ & Lemma~\ref{lem:N} \\
+$K$ & $8/(da\theta)$, in the proof & Theorem~\ref{thm:main} \\
 \bottomrule
 \end{longtable}
 
