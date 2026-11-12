@@ -23,15 +23,15 @@
 \begin{document}
 
 \begin{abstract}
-For a Boolean function $f$ and a coordinate $i$, the erasure entropy $E_i(f)$ is the conditional entropy of the event
+The erasure entropy $E_i(f)$ of a coordinate $i$ of a Boolean function $f$ is the conditional entropy of the event
 $i\in U$ given $U\setminus\{i\}$, where $U$ is drawn from the spectral distribution $\hat f^2$. The Fourier
 entropy-influence conjecture is equivalent to every non-constant $f$ having a coordinate with $E_i(f)=O(\Inf_i(f))$.
-Consider monotone formulas in disjunctive normal form (DNFs) whose terms all have width $w$, any two of which share at
-most one variable, and in which every variable lies in at most $\Delta$ terms. We show that $E_i(f)/\Inf_i(f)=2+o(1)$
-at every relevant coordinate, uniformly in the number of variables and terms, as $w\to\infty$ with
-$\Delta\le2^{(1-\eta)(w-1)}$ for a fixed $\eta>0$, with an explicit error bound. The proof rests on a separation
-inequality, valid for every monotone function, that gives $E_i/\Inf_i$ close to $2$ whenever the derivative $D_if$
-puts little spectral weight outside a family of sets on which the restriction $f|_{x_i=0}$ puts little weight.
+For monotone formulas in disjunctive normal form whose terms all have width $w$, any two sharing at most one variable,
+and in which every variable lies in at most $\Delta$ terms, we show that $E_i(f)/\Inf_i(f)=2+o(1)$ at every relevant
+coordinate, uniformly in the number of variables and terms, as $w\to\infty$ with $\Delta\le2^{(1-\eta)(w-1)}$ for a
+fixed $\eta>0$. The proof rests on a separation inequality for monotone functions: $E_i/\Inf_i$ is close to $2$
+whenever the derivative $D_if$ puts little spectral weight outside a family of sets on which the restriction
+$f|_{x_i=0}$ puts little weight.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
